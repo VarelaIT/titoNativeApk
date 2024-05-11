@@ -4,44 +4,44 @@ import com.varelait.titonativeapk.entities.FrameDiff;
 import com.varelait.titonativeapk.entities.GlassDiff;
 import com.varelait.titonativeapk.entities.PanelDiff;
 
-public class Measures {
+public class Measures implements IMeasures {
     private FrameDiff frameDiff = new FrameDiff();
     private PanelDiff panelDiff = new PanelDiff();
     private GlassDiff glassDiff = new GlassDiff();
-    private final float base;
-    private float heigth;
-    private float panels;
+    private final Float base;
+    private Float heigth;
+    private Float panels;
 
-    Measures(float base, float heigth, float panels) {
+    public Measures(float base, float heigth, float panels) {
         this.base = base;
         this.heigth = heigth;
         this.panels = panels;
     }
 
-    float getRails() {
+    public Float getRails() {
         return this.base - this.frameDiff.base;
     }
 
-    float getLaterals() {
+    public Float getLaterals() {
         return this.heigth - this.frameDiff.heigth;
     }
 
-    float getAlfaisal() {
+    public Float getAlfaisal() {
         return (this.base - this.panelDiff.alfaisal * this.panels) / this.panels;
     }
 
-    float getJambas() {
+    public Float getJambas() {
         return this.heigth - this.panelDiff.jambas;
     }
 
-    float getGlassBase() {
+    public Float getGlassBase() {
         return (
             (this.getRails() - this.glassDiff.base - this.glassDiff.base * this.panels)
             / this.panels
         );
     }
 
-    float getGlassHeigth() {
+    public Float getGlassHeigth() {
         return this.heigth - this.glassDiff.heigth;
     }
 }
