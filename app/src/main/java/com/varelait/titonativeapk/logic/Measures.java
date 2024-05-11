@@ -5,16 +5,16 @@ import com.varelait.titonativeapk.entities.GlassDiff;
 import com.varelait.titonativeapk.entities.PanelDiff;
 
 public class Measures implements IMeasures {
-    private FrameDiff frameDiff = new FrameDiff();
-    private PanelDiff panelDiff = new PanelDiff();
-    private GlassDiff glassDiff = new GlassDiff();
+    private final FrameDiff frameDiff = new FrameDiff();
+    private final PanelDiff panelDiff = new PanelDiff();
+    private final GlassDiff glassDiff = new GlassDiff();
     private final Float base;
-    private Float heigth;
-    private Float panels;
+    private final Float height;
+    private final Float panels;
 
-    public Measures(float base, float heigth, float panels) {
+    public Measures(float base, float height, float panels) {
         this.base = base;
-        this.heigth = heigth;
+        this.height = height;
         this.panels = panels;
     }
 
@@ -23,7 +23,7 @@ public class Measures implements IMeasures {
     }
 
     public Float getLaterals() {
-        return this.heigth - this.frameDiff.heigth;
+        return this.height - this.frameDiff.height;
     }
 
     public Float getAlfaisal() {
@@ -31,17 +31,14 @@ public class Measures implements IMeasures {
     }
 
     public Float getJambas() {
-        return this.heigth - this.panelDiff.jambas;
+        return this.height - this.panelDiff.jambas;
     }
 
     public Float getGlassBase() {
-        return (
-            (this.getRails() - this.glassDiff.base - this.glassDiff.base * this.panels)
-            / this.panels
-        );
+        return (this.getRails() - glassDiff.base - (glassDiff.base * this.panels)) / this.panels;
     }
 
     public Float getGlassHeigth() {
-        return this.heigth - this.glassDiff.heigth;
+        return this.height - this.glassDiff.heigth;
     }
 }
