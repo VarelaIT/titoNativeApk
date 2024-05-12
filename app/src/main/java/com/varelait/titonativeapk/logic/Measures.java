@@ -1,5 +1,7 @@
 package com.varelait.titonativeapk.logic;
 
+import android.util.Log;
+
 import com.varelait.titonativeapk.entities.FrameDiff;
 import com.varelait.titonativeapk.entities.GlassDiff;
 import com.varelait.titonativeapk.entities.PanelDiff;

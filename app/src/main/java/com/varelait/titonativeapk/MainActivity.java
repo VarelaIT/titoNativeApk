@@ -4,6 +4,8 @@ import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,44 +37,59 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         calcBtn = (Button)findViewById(R.id.calculateBtn);
         calcBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calculate();
+                calculate(v);
             }
         });
     }
 
-    void calculate () {
+    void calculate (View view) {
+        Button button = (Button)view;
         getBaseInput();
         getHeightInput();
         getPanelInput();
         TextView baseOutput = (TextView)findViewById(R.id.baseOutput);
 
+        //Log.d("Tacker", "base: " + base + " height: " + height + " panels: " + panel );
         if (base > 10 && height > 10 && panel > 1) {
            measures = new Measures(base, height, panel);
            baseOutput.setText((CharSequence)measures.getGlassBase().toString());
         } else
-            notifyError();
+            button.setText((CharSequence) "Error");
     }
 
     void notifyError () {
     }
 
     void getPanelInput () {
-        EditText inputView = (EditText) findViewById(R.id.baseInput);
-        this.panel = parseInt(inputView.getText().toString());
+        EditText inputView = (EditText) findViewById(R.id.panelInput);
+        Editable value = inputView.getText();
+        if (value != null)
+            this.panel = parseInt(inputView.getText().toString());
+        else
+            this.panel = 2;
     }
 
     void getHeightInput () {
         EditText inputView = (EditText) findViewById(R.id.baseInput);
-        this.height = parseFloat(inputView.getText().toString());
+        Editable value = inputView.getText();
+        if (value != null)
+            this.height = parseFloat(value.toString());
+        else
+            this.height = 0;
     }
 
     void getBaseInput () {
         EditText inputView = (EditText) findViewById(R.id.baseInput);
-        this.base = parseFloat(inputView.getText().toString());
+        Editable value = inputView.getText();
+        if (value != null)
+            this.base = parseFloat(value.toString());
+        else
+            this.base = 0;
     }
 
 }
